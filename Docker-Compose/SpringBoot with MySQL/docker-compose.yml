@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  mydb: 
+     image: mysql:5.7
+     ports:
+       - 33306:3306
+     environment:
+        MYSQL_ROOT_PASSWORD: sysadm
+        MYSQL_DATABASE: spring_boot
+     networks: 
+       - compose-demo
+  springboot: 
+     build: .
+     ports:
+       - 8089:8087
+     links: 
+       - mydb   
+     networks: 
+       - compose-demo
+       
+networks: 
+  compose-demo: 
